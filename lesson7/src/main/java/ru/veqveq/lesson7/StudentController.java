@@ -1,13 +1,11 @@
 package ru.veqveq.lesson7;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/students")
 public class StudentController {
@@ -16,5 +14,15 @@ public class StudentController {
     @GetMapping("/findAll")
     private List<Student> findAll() {
         return studentService.findAll();
+    }
+
+    @PostMapping("/del")
+    private void remove(@RequestParam Long studentId) {
+        studentService.remove(studentId);
+    }
+
+    @PostMapping("/add")
+    private void addStudent(@RequestBody Student student) {
+        studentService.saveOrUpdate(student);
     }
 }

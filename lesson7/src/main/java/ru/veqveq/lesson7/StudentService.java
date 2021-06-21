@@ -15,8 +15,8 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public void remove(Student student) {
-        studentRepository.deleteById(student.getId());
+    public void remove(Long id) {
+        studentRepository.deleteById(id);
     }
 
     public List<Student> findAll() {
