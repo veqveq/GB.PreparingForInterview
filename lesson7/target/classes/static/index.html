@@ -1,0 +1,67 @@
+<!doctype html>
+
+
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body ng-controller="mainController">
+<h1>Students</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="s in Table">
+        <th ng-model="student.id">{{s.id}}</th>
+        <td>{{s.name}}</td>
+        <td>{{s.age}}</td>
+        <td>
+            <button type="button" class="btn btn-danger" ng-click="delete(s.id)">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<form class="row" ng-submit="addStudent()">
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Name" ng-model="NewStudent.name">
+    </div>
+    <div class="col">
+        <input type="number" step="any" class="form-control" placeholder="Age" ng-model="NewStudent.age">
+    </div>
+    <div class="col">
+        <button type="submit" class="btn btn-outline-success">Save</button>
+    </div>
+</form>
+<form class="row" ng-submit="updateStudent()">
+    <div class="col">
+        <input type="number" class="form-control" placeholder="Id" ng-model="UpdatedStudent.id">
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Name" ng-model="UpdatedStudent.name">
+    </div>
+    <div class="col">
+        <input type="number" step="any" class="form-control" placeholder="Age" ng-model="UpdatedStudent.age">
+    </div>
+    <div class="col">
+        <button type="submit" class="btn btn-outline-success">Update</button>
+    </div>
+</form>
+</body>
+</html>

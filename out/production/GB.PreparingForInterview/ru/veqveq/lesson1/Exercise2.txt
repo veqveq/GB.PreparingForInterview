@@ -1,0 +1,104 @@
+interface Moveable {
+    void move();
+}
+
+interface Stopable {
+    void stop();
+}
+
+//*Оптимальней будет указать имплементацию интерфейса Moveable для класса Car
+//*public Engine нарушает принцип инкапсуляции. Нужен модификатор доступа private
+//*Оптимальный вариант - abstract class Car implements Moveable
+
+abstract class Car {
+    public Engine engine;
+    private String color;
+    private String name;
+
+
+    protected void start() {
+        System.out.println("Car starting");
+    }
+
+    abstract void open();
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+//*Оптимальней будет перенести имплементацию Moveable в класс Car
+//*Вариант оптимизации:
+
+//*class LightWeightCar extends Car{
+//*    @Override
+//*    void open() {
+//*        System.out.println("Car is open");
+//*    }
+//*
+//*    @Override
+//*    public void move() {
+//*        System.out.println("Car is moving");
+//*    }
+//*}
+
+class LightWeightCar extends Car implements Moveable{
+
+    @Override
+    void open() {
+        System.out.println("Car is open");
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Car is moving");
+    }
+}
+
+
+//*Класс не может наследоваться от интерфейсов
+//*Множественное наследование не допускается
+//*Интерфейс Moveable уже объявлен в классе Car, второй раз указывать имплементацию этого интерфейса смысла нет
+//*В классе не реализован абсрактный метод open() абстрактного класса Car
+
+//*Оптимизация:
+//*Если наследоваться от класса LightWeightCar то методы open() и move() можно не реализовывать
+//*Вариант оптимизации
+
+//*class Lorry extends LightWeightCar implements Stopable{
+//*    public void stop(){
+//*        System.out.println("Car is stop");
+//*    }
+//*}
+
+
+class Lorry extends Car, Moveable, Stopable{
+
+    public void move(){
+        System.out.println("Car is moving");
+    }
+
+    public void stop(){
+        System.out.println("Car is stop");
+    }
+}
